@@ -1,24 +1,21 @@
+import 'package:flutter_ebutler_task/features/auth/data/datasource/remove_data_source.dart';
+import 'package:flutter_ebutler_task/features/auth/data/repository/auth_repository.dart';
+import 'package:flutter_ebutler_task/features/auth/domain/repository/base_auth_repository.dart';
+import 'package:flutter_ebutler_task/features/auth/domain/usecaese/login_usecase.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
 
 class ServiceLocator {
   void init() {
-    // /// movies bloc
-    // /// registerFactory => علشان كل لما ادخل علي الصفحه يعمل اوبجت جديد وينادي علي الداتا من ال api
-    // sl.registerFactory(() => MoviesBloc(sl(), sl(), sl()));
-    //
-    // /// movies use case
-    // /// registerLazySingleton => بيعمل اوبجكت لما انا دي عليه او لما احتاجه
-    // sl.registerLazySingleton(() => GetNowPlayingMoviesUseCase(sl()));
-    // sl.registerLazySingleton(() => GetPopularMoviesUseCase(sl()));
-    // sl.registerLazySingleton(() => GetTopRatedMoviesUseCase(sl()));
-    //
-    // /// movies repositories
-    // sl.registerLazySingleton<BaseMoviesRepository>(() => MovieRepository(sl()));
-    //
-    // /// movies remote data source
-    // sl.registerLazySingleton<BaseMovieRemoteDataSource>(
-    //     () => MovieRemoteDataSource());
+    /// auth usecase
+    sl.registerLazySingleton(() => LoginUseCase(sl()));
+
+    /// auth repositories
+    sl.registerLazySingleton<BaseAuthRepository>(() => AuthRepository(sl()));
+
+    /// auth remote data source
+    sl.registerLazySingleton<BaseAuthRemoteDataSource>(
+        () => AuthRemoteDataSource());
   }
 }
